@@ -45,6 +45,11 @@ let obj = {
     sun
 }
 
+/**
+ *  柯里化是一个函数返回一个函数然后在返回一个函数
+ *  组合是 结果依赖上一个函数的结果 在执行
+ */
+
 // fn 就是一个变量和他的作用域是没有关系的
 function hyCurrying(fn) { // fn = obj.fn
     function Currying(...args) {
@@ -55,12 +60,19 @@ function hyCurrying(fn) { // fn = obj.fn
             return fn.call(this, ...args)
             // return fn(...args) // obj.fn
         } else {
+            // args == 1 2你就没办法获取了 你只能在返回一个新的函数去接受2 然后在执行fn(新传递的值+旧传递的值)
+            // fn()
+
+
             // 闭包
             // 为了this 统一
             function Currying2(...args2) {
                 return Currying.call(this, ...args, ...args2)
                 // return Currying(...args, ...args2)
             };
+            
+            
+            // 这个返回新的函数是为了获取新传递的值和上一个函数拼接起来
             return Currying2
         };
     };
@@ -68,17 +80,13 @@ function hyCurrying(fn) { // fn = obj.fn
 }
 
 
-let objtest =  {
-    list: hyCurrying(sun)
-}
 
-
-objtest.list(1,1,1);
-
+let h = hyCurrying(sun)
+h(1)(2)(3)
 
 /**
  * 柯里化执行
- * hyCurrying(10)(20)(30)
+ * 
  * 
  * 
  * fn就是一个变量 作用域是在他声明函数的时候就确认了
