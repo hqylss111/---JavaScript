@@ -46,6 +46,9 @@ let obj = {
 }
 
 /**
+ *  拿你需要穿入的变量和执行的函数相同
+ * 
+ * 
  *  柯里化是一个函数返回一个函数然后在返回一个函数
  *  组合是 结果依赖上一个函数的结果 在执行
  */
@@ -70,7 +73,6 @@ function hyCurrying(fn) { // fn = obj.fn
                 return Currying.call(this, ...args, ...args2)
                 // return Currying(...args, ...args2)
             };
-            
             
             // 这个返回新的函数是为了获取新传递的值和上一个函数拼接起来
             return Currying2
